@@ -14,9 +14,9 @@ const write = async movies => {
     if (Array.isArray(oldMovie) && oldMovie.length) {
       // 更新movies表里的数据
       const old = oldMovie[0];
-      await query('UPDATE movies SET name=?,href=?,image=?,score=? WHERE id=?', [movie.name, movie.href, movie.image, movie.source, old.id]);
+      await query('UPDATE movies SET name=?,href=?,image=?,rate=? WHERE id=?', [movie.name, movie.href, movie.image, movie.rate, old.id]);
     } else {
-      await query('INSERT INTO movies(id,name,href,image,score) VALUES(?,?,?,?,?)', [movie.id, movie.name, movie.href, movie.image, movie.score]);
+      await query('INSERT INTO movies(id,name,href,image,rate) VALUES(?,?,?,?,?)', [movie.id, movie.name, movie.href, movie.image, movie.rate]);
     }
 
     debug(`正在写入电影：${movie.name}`);

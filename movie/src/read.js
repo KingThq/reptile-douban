@@ -23,22 +23,24 @@ const read = async url => {
     $('#screening li.ui-slide-item').each((index, item) => {
       let ele = $(item);
       let name = ele.data('title');
-      let source = ele.data('rate') || '暂无评分';
-      let href = ele.find('.poster a').attr('src');
+      let rate = ele.data('rate') || '暂无评分';
+      let href = ele.find('.poster a').attr('href');
       let image = ele.find('img').attr('src');
       // 影片id可以从影片href中获取到
       let id = href && href.match(/(\d+)/)[1];
       // 为了防止豆瓣防盗链导致裂图，换成webp格式加载图片
       image = image && image.replace(/jpg$/, 'webp');
 
-      if (!name || !image || !href) return;
-      result.push({
-        name,
-        source,
-        href,
-        image,
-        id
-      });
+      if (rate !== '暂无评分' ) {
+        result.push({
+          name,
+          rate,
+          href,
+          image,
+          id
+        });
+      };
+      
       debug(`正在读取电影：${name}`);
     });
     return result;
